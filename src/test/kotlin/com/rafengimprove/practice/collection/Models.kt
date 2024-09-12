@@ -41,15 +41,15 @@ class BinaryTree(list: List<Int>): Tree {
         TODO("Not yet implemented")
     }
 
-    override fun size(node: Node?): Int {
+    override fun size(node: Node?): Int { // root(3), node(2), node(1), node(0)
         var result = 0
         if (node != null) {
             result += 1
             if (node.hasLeft()) {
-                result += size(node.left)
+                result += size(node.left) // node(2), node(1), node(0)
             }
             if (node.hasRight()) {
-                result += size(node.right)
+                result += size(node.right) // node(4), node(5), node(6)
             }
         } else {
             result += size(root)
