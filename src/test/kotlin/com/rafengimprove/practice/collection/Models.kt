@@ -71,10 +71,12 @@ class BinaryTree(list: List<Int>): Tree {
     private fun printAsc(element: Node) {
         if (element.hasLeft()) {
             printAsc(element.left!!)
+            println("Value is: ${element.value}")
         } else if (element.hasRight()) {
             printAsc(element.right!!)
+            println("Value is: ${element.value}")
         } else {
-            println(element.value)
+            println("Value is: ${element.value}")
         }
     }
 }

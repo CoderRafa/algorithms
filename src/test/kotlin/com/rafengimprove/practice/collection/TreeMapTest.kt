@@ -13,6 +13,7 @@ class TreeMapTest {
     fun `Happy pass - try to add some values to a TreeMap`() {
         val treeMap = BinaryTree(listOf(0, 1, 2, 3, 4, 5, 6))
         assertEquals(7, treeMap.size())
+        treeMap.printAll()
     }
 
     @Test
