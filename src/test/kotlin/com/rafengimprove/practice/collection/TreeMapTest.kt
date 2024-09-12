@@ -14,4 +14,14 @@ class TreeMapTest {
         val treeMap = BinaryTree(listOf(0, 1, 2, 3, 4, 5, 6))
         assertEquals(7, treeMap.size())
     }
+
+    @Test
+    fun `Happy pass - init tree and then add more elements`() {
+        val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
+        assertEquals(7, treeMap.size())
+        treeMap.add(16)
+        treeMap.add(27)
+        treeMap.add(57)
+        assertEquals(10, treeMap.size())
+    }
 }
