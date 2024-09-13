@@ -55,7 +55,6 @@ class BinaryTree(list: List<Int>) : Tree {
             currentElement
     }
 
-
     override fun contains(element: Int): Boolean {
         return findNode(element)
     }
