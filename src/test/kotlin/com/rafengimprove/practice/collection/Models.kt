@@ -6,7 +6,7 @@ interface Tree {
     fun size(node: Node? = null): Int
 }
 
-class BinaryTree(list: List<Int>): Tree {
+class BinaryTree(list: List<Int>) : Tree {
     private var root: Node
 
     init {
@@ -26,6 +26,7 @@ class BinaryTree(list: List<Int>): Tree {
             }
         }
     }
+
     private fun addRight(element: Node, rightPart: List<Int>) {
         if (rightPart.isNotEmpty()) {
             element.right = Node(rightPart[0])
@@ -34,25 +35,21 @@ class BinaryTree(list: List<Int>): Tree {
             }
         }
     }
+
     override fun add(element: Int) {
         findNodeForAdding(element)
     }
 
-    private fun findNodeForAdding(element: Int, currentElement: Node? = root) {
-        if (currentElement != null) {
-            if (element < currentElement.value) {
-                if (currentElement.hasLeft()) {
-                    findNodeForAdding(element, currentElement.left)
-                } else {
-                    currentElement.left = Node(element)
-                }
-            } else if (element > currentElement.value) {
-                if (currentElement.hasRight()) {
-                    findNodeForAdding(element, currentElement.right)
-                } else {
-                    currentElement.right = Node(element)
-                }
+    fun findNodeForAdding(element: Int, currentElement: Node? = root): Node {
+        return if (currentElement == null) {
+            root
+        } else {
+            if (element < currentElement.value && currentElement.hasLeft()) {
+                findNodeForAdding(element, currentElement.left)
+            } else if (element > currentElement.value && currentElement.hasRight()) {
+                findNodeForAdding(element, currentElement.right)
             }
+            return currentElement
         }
     }
 
@@ -73,7 +70,7 @@ class BinaryTree(list: List<Int>): Tree {
                     println("The node has left it is ${currentElement.left}")
                     return findNode(element, currentElement.left)
                 }
-            } else if (element > currentElement.value) {
+            } else {
                 if (currentElement.hasRight()) {
                     return findNode(element, currentElement.right)
                 }
@@ -99,7 +96,7 @@ class BinaryTree(list: List<Int>): Tree {
     }
 
     fun printAll(element: Node = root, type: DirectionType = DirectionType.ASC) {
-        when(type) {
+        when (type) {
             DirectionType.ASC -> printAsc(element)
             DirectionType.DESC -> printDesc(element)
         }
@@ -129,7 +126,8 @@ class BinaryTree(list: List<Int>): Tree {
         }
     }
 }
-data class Node (
+
+data class Node(
     var value: Int,
     var left: Node? = null,
     var right: Node? = null

@@ -41,4 +41,11 @@ class TreeMapTest {
         treeMap.printAll()
         treeMap.printAll(type = DirectionType.DESC)
     }
+
+    @Test
+    fun `Happy pass - node can be null`() {
+        val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
+        val node = treeMap.findNodeForAdding(54)
+        assertEquals(54, node.value)
+    }
 }
