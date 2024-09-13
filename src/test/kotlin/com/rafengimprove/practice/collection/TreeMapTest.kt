@@ -25,4 +25,20 @@ class TreeMapTest {
         treeMap.add(57)
         assertEquals(10, treeMap.size())
     }
+
+    @Test
+    fun `Happy pass - a tree contains the given element`() {
+        val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
+        assertEquals(true, treeMap.contains(43))
+        assertEquals(true, treeMap.contains(32))
+        assertEquals(true, treeMap.contains(10))
+        assertEquals(true, treeMap.contains(65))
+    }
+
+    @Test
+    fun `Happy pass - printAll`() {
+        val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
+        treeMap.printAll()
+        treeMap.printAll(type = DirectionType.DESC)
+    }
 }

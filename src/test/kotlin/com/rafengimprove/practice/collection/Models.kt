@@ -35,10 +35,51 @@ class BinaryTree(list: List<Int>): Tree {
         }
     }
     override fun add(element: Int) {
-        TODO("Not yet implemented")
+        findNodeForAdding(element)
     }
+
+    private fun findNodeForAdding(element: Int, currentElement: Node? = root) {
+        if (currentElement != null) {
+            if (element < currentElement.value) {
+                if (currentElement.hasLeft()) {
+                    findNodeForAdding(element, currentElement.left)
+                } else {
+                    currentElement.left = Node(element)
+                }
+            } else if (element > currentElement.value) {
+                if (currentElement.hasRight()) {
+                    findNodeForAdding(element, currentElement.right)
+                } else {
+                    currentElement.right = Node(element)
+                }
+            }
+        }
+    }
+
     override fun contains(element: Int): Boolean {
-        TODO("Not yet implemented")
+        return findNode(element)
+    }
+
+    private fun findNode(element: Int, currentElement: Node? = root): Boolean {
+        println("The current element is now $currentElement")
+        if (currentElement != null) {
+            println("We are in not null the current value is ${currentElement.value} and the element is $element")
+            if (currentElement.value == element) {
+                println("We are here because the element was found")
+                return true
+            } else if (element < currentElement.value) {
+                println("$element is less than ${currentElement.value}")
+                if (currentElement.hasLeft()) {
+                    println("The node has left it is ${currentElement.left}")
+                    return findNode(element, currentElement.left)
+                }
+            } else if (element > currentElement.value) {
+                if (currentElement.hasRight()) {
+                    return findNode(element, currentElement.right)
+                }
+            }
+        }
+        return false
     }
 
     override fun size(node: Node?): Int { // root(3), node(2), node(1), node(0)
@@ -65,18 +106,26 @@ class BinaryTree(list: List<Int>): Tree {
     }
 
     private fun printDesc(element: Node) {
-        TODO("Not yet implemented")
+        if (element.hasRight()) {
+            printDesc(element.right!!)
+            println("Value is: ${element.value}")
+        } else if (element.hasLeft()) {
+            printDesc(element.left!!)
+            println("Value is ${element.value}")
+        } else {
+            println("Value is: ${element.value}")
+        }
     }
 
     private fun printAsc(element: Node) {
         if (element.hasLeft()) {
             printAsc(element.left!!)
-            println("Value is: ${element.value}")
-        } else if (element.hasRight()) {
+        }
+
+        println("Value is: ${element.value}")
+
+        if (element.hasRight()) {
             printAsc(element.right!!)
-            println("Value is: ${element.value}")
-        } else {
-            println("Value is: ${element.value}")
         }
     }
 }
