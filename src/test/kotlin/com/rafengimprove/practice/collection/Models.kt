@@ -40,18 +40,15 @@ class BinaryTree(list: List<Int>) : Tree {
         findNodeForAdding(element)
     }
 
-    fun findNodeForAdding(element: Int, currentElement: Node? = root): Node {
-        return if (currentElement == null) {
-            root
-        } else {
-            if (element < currentElement.value && currentElement.hasLeft()) {
-                findNodeForAdding(element, currentElement.left)
+    fun findNodeForAdding(element: Int, currentElement: Node = root): Node {
+        return if (element < currentElement.value && currentElement.hasLeft()) {
+                findNodeForAdding(element, currentElement.left!!)
             } else if (element > currentElement.value && currentElement.hasRight()) {
-                findNodeForAdding(element, currentElement.right)
-            }
-            return currentElement
-        }
+                findNodeForAdding(element, currentElement.right!!)
+            } else
+                currentElement
     }
+
 
     override fun contains(element: Int): Boolean {
         return findNode(element)
