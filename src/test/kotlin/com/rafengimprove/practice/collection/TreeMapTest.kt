@@ -36,16 +36,23 @@ class TreeMapTest {
     }
 
     @Test
-    fun `Happy pass - printAll`() {
-        val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
-        treeMap.printAll()
-        treeMap.printAll(type = DirectionType.DESC)
-    }
-
-    @Test
     fun `Happy pass - node can be null`() {
         val treeMap = BinaryTree(listOf(10, 21, 32, 43, 54, 65, 67))
         val node = treeMap.findNodeForAdding(54)
         assertEquals(54, node.value)
+    }
+
+    @Test
+    fun `Negative pass - try to add a value that already exists in the tree`() {
+        val treeMap = BinaryTree(listOf(0, 1, 2, 3, 4, 5, 6))
+        assertEquals(7, treeMap.size())
+        treeMap.add(2)
+        assertEquals(7, treeMap.size())
+    }
+
+    @Test
+    fun `Negative pass - the tree doesn't contain an element`() {
+        val treeMap = BinaryTree(listOf(0, 1, 2, 3, 4, 5, 6))
+        assertEquals(false, treeMap.contains(7))
     }
 }
