@@ -1,4 +1,4 @@
-package com.rafengimprove.practice.collection
+package com.rafengimprove.practice.model
 
 interface Tree {
     fun add(element: Int)
