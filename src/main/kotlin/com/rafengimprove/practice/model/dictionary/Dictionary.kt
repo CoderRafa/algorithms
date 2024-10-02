@@ -19,3 +19,14 @@ class TelephoneDictionary(list: MutableList<Telephone>): AbstractDictionaryImpl<
 }
 
 data class Telephone(val phone: String)
+
+class GenericDictionaryImpl<T>(private val list: MutableList<T>) : Dictionary<T>, MutableList<T> by list {
+    override fun search(query: String): T {
+        TODO("Not yet implemented")
+    }
+
+    override fun search(predicate: (T) -> Boolean): List<T> {
+        TODO("Not yet implemented")
+    }
+
+}
