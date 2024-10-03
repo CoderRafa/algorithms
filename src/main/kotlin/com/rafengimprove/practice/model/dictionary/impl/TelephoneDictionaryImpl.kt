@@ -15,6 +15,7 @@ class TelephoneDictionaryImpl(list: MutableList<Telephone>) : AbstractDictionary
     override fun search(predicate: (Telephone) -> Boolean): List<Telephone> {
 
         if (list.isEmpty()) throw TheListIsEmptyException()
+        if (super.search(predicate).isEmpty()) throw AnElementWasNotFoundException()
 
         return super.search(predicate)
     }

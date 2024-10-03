@@ -1,13 +1,12 @@
-package com.rafengimprove.practice.model.dictionary
+package com.rafengimprove.practice.model.dictionary.impl
 
 import com.rafengimprove.practice.model.dictionary.exceptions.AnElementWasNotFoundException
 import com.rafengimprove.practice.model.dictionary.exceptions.TheListIsEmptyException
-import com.rafengimprove.practice.model.dictionary.impl.TelephoneDictionaryImpl
 import com.rafengimprove.practice.model.dictionary.model.Telephone
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertTrue
 
 class TelephoneDictionaryImplTest {
 
@@ -103,7 +102,55 @@ class TelephoneDictionaryImplTest {
 
         assertEquals(7, phoneNumbers.size)
 
-        assertThrows<TheListIsEmptyException> { phoneNumbers.search { it.phone.startsWith("131") } }
+        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("131") } }
+    }
+
+    @Test
+    fun `Happy pass - add an element and delete that element`() {
+        val phoneNumbers = TelephoneDictionaryImpl(
+            mutableListOf(
+                Telephone("131245687"),
+                Telephone("931248687"),
+                Telephone("931249687"),
+                Telephone("231244687"),
+                Telephone("231245687"),
+                Telephone("331245687"),
+                Telephone("431245687"),
+                Telephone("531245687")
+            )
+        )
+
+        assertEquals(8, phoneNumbers.size)
+
+        phoneNumbers.add(Telephone("111222333"))
+
+        assertEquals(9, phoneNumbers.size)
+
+        assertEquals("111222333", phoneNumbers.search("111222333").phone)
+
+        phoneNumbers.remove(Telephone("111222333"))
+
+        assertEquals(8, phoneNumbers.size)
+
+        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search("111222333") }
+    }
+
+    @Test
+    fun `Happy pass - the list contains an element`() {
+        val phoneNumbers = TelephoneDictionaryImpl(
+            mutableListOf(
+                Telephone("131245687"),
+                Telephone("931248687"),
+                Telephone("931249687"),
+                Telephone("231244687"),
+                Telephone("231245687"),
+                Telephone("331245687"),
+                Telephone("431245687"),
+                Telephone("531245687")
+            )
+        )
+
+        assertTrue(phoneNumbers.contains(Telephone("231244687")))
     }
 
     @Test
@@ -131,5 +178,23 @@ class TelephoneDictionaryImplTest {
         assertThrows<AnElementWasNotFoundException> { phoneNumbers.search("531245888") }
     }
 
+    @Test
+    fun `Negative pass - find a deleted number`() {
+        val phoneNumbers = TelephoneDictionaryImpl(
+            mutableListOf(
+                Telephone("131245687"),
+                Telephone("931248687"),
+                Telephone("931249687"),
+                Telephone("231244687"),
+                Telephone("231245687"),
+                Telephone("331245687"),
+                Telephone("431245687"),
+                Telephone("531245687")
+            )
+        )
 
+        phoneNumbers.remove(Telephone("331245687"))
+
+        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("3312") } }
+    }
 }
