@@ -1,7 +1,7 @@
-package com.rafengimprove.practice.model.dictionary.impl
+package com.rafengimprove.practice.model.dictionary.impl.abst
 
-import com.rafengimprove.practice.model.dictionary.exceptions.AnElementWasNotFoundException
-import com.rafengimprove.practice.model.dictionary.exceptions.TheListIsEmptyException
+import com.rafengimprove.practice.model.dictionary.exceptions.ElementWasNotFoundException
+import com.rafengimprove.practice.model.dictionary.exceptions.ListIsEmptyException
 import com.rafengimprove.practice.model.dictionary.model.Car
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 class CarDictionaryImplTest {
     @Test
     fun `Happy pass - find elements according to given string`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -27,7 +27,7 @@ class CarDictionaryImplTest {
 
     @Test
     fun `Happy pass - find elements according to given predicate`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -45,7 +45,7 @@ class CarDictionaryImplTest {
 
     @Test
     fun `Happy pass - find an element which is the only one in the list`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("F4365HG")
             )
@@ -57,7 +57,7 @@ class CarDictionaryImplTest {
 
     @Test
     fun `Happy pass - an element is added to the list`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -81,7 +81,7 @@ class CarDictionaryImplTest {
 
     @Test
     fun `Happy pass - an element was deleted from the list`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -100,12 +100,12 @@ class CarDictionaryImplTest {
 
         assertEquals(7, licencePlateNumbers.size)
 
-        assertThrows<AnElementWasNotFoundException> { licencePlateNumbers.search { it.licencePlate.startsWith("B990") } }
+        assertThrows<ElementWasNotFoundException> { licencePlateNumbers.search { it.licencePlate.startsWith("B990") } }
     }
 
     @Test
     fun `Happy pass - add an element and delete that element`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -130,12 +130,12 @@ class CarDictionaryImplTest {
 
         assertEquals(8, licencePlateNumbers.size)
 
-        assertThrows<AnElementWasNotFoundException> { licencePlateNumbers.search("V3324HY") }
+        assertThrows<ElementWasNotFoundException> { licencePlateNumbers.search("V3324HY") }
     }
 
     @Test
     fun `Happy pass - the list contains an element`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -153,14 +153,14 @@ class CarDictionaryImplTest {
 
     @Test
     fun `Negative pass - find a number in an empty list`() {
-        val licencePlateNumbers = CarDictionaryImpl(mutableListOf())
+        val licencePlateNumbers = CarDictionaryAbstractImpl(mutableListOf())
 
-        assertThrows<TheListIsEmptyException> { licencePlateNumbers.search("D4567YU") }
+        assertThrows<ListIsEmptyException> { licencePlateNumbers.search("D4567YU") }
     }
 
     @Test
     fun `Negative pass - find a non existing in list licencePlate number`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -173,12 +173,12 @@ class CarDictionaryImplTest {
             )
         )
 
-        assertThrows<AnElementWasNotFoundException> { licencePlateNumbers.search("D9988YU") }
+        assertThrows<ElementWasNotFoundException> { licencePlateNumbers.search("D9988YU") }
     }
 
     @Test
     fun `Negative pass - find a deleted number`() {
-        val licencePlateNumbers = CarDictionaryImpl(
+        val licencePlateNumbers = CarDictionaryAbstractImpl(
             mutableListOf(
                 Car("B9908PK"),
                 Car("A9317TX"),
@@ -193,6 +193,6 @@ class CarDictionaryImplTest {
 
         licencePlateNumbers.remove(Car("P8734GH"))
 
-        assertThrows<AnElementWasNotFoundException> { licencePlateNumbers.search { it.licencePlate.startsWith("P873") } }
+        assertThrows<ElementWasNotFoundException> { licencePlateNumbers.search { it.licencePlate.startsWith("P873") } }
     }
 }

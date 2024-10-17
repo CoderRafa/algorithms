@@ -1,7 +1,7 @@
-package com.rafengimprove.practice.model.dictionary.impl
+package com.rafengimprove.practice.model.dictionary.impl.abst
 
-import com.rafengimprove.practice.model.dictionary.exceptions.AnElementWasNotFoundException
-import com.rafengimprove.practice.model.dictionary.exceptions.TheListIsEmptyException
+import com.rafengimprove.practice.model.dictionary.exceptions.ElementWasNotFoundException
+import com.rafengimprove.practice.model.dictionary.exceptions.ListIsEmptyException
 import com.rafengimprove.practice.model.dictionary.model.Telephone
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -12,7 +12,7 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Happy pass - find elements according to given string`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -29,7 +29,7 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Happy pass - find elements according to given predicate`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -47,7 +47,7 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Happy pass - find an element which is the only one in the list`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("12345678")
             )
@@ -59,7 +59,7 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Happy pass - an element is added to the list`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -83,7 +83,7 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Happy pass - an element was deleted from the list`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -102,12 +102,12 @@ class TelephoneDictionaryImplTest {
 
         assertEquals(7, phoneNumbers.size)
 
-        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("131") } }
+        assertThrows<ElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("131") } }
     }
 
     @Test
     fun `Happy pass - add an element and delete that element`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -132,12 +132,12 @@ class TelephoneDictionaryImplTest {
 
         assertEquals(8, phoneNumbers.size)
 
-        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search("111222333") }
+        assertThrows<ElementWasNotFoundException> { phoneNumbers.search("111222333") }
     }
 
     @Test
     fun `Happy pass - the list contains an element`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -155,14 +155,14 @@ class TelephoneDictionaryImplTest {
 
     @Test
     fun `Negative pass - find a number in an empty list`() {
-        val phoneNumbers = TelephoneDictionaryImpl(mutableListOf())
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(mutableListOf())
 
-        assertThrows<TheListIsEmptyException> { phoneNumbers.search("531245888") }
+        assertThrows<ListIsEmptyException> { phoneNumbers.search("531245888") }
     }
 
     @Test
     fun `Negative pass - find a non existing in list phone number`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -175,12 +175,12 @@ class TelephoneDictionaryImplTest {
             )
         )
 
-        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search("531245888") }
+        assertThrows<ElementWasNotFoundException> { phoneNumbers.search("531245888") }
     }
 
     @Test
     fun `Negative pass - find a deleted number`() {
-        val phoneNumbers = TelephoneDictionaryImpl(
+        val phoneNumbers = TelephoneDictionaryAbstractImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -195,6 +195,6 @@ class TelephoneDictionaryImplTest {
 
         phoneNumbers.remove(Telephone("331245687"))
 
-        assertThrows<AnElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("3312") } }
+        assertThrows<ElementWasNotFoundException> { phoneNumbers.search { it.phone.startsWith("3312") } }
     }
 }
