@@ -2,14 +2,15 @@ package com.rafengimprove.practice.model.dictionary.impl.genet
 
 import com.rafengimprove.practice.model.dictionary.exceptions.ElementWasNotFoundException
 import com.rafengimprove.practice.model.dictionary.exceptions.ListIsEmptyException
+import com.rafengimprove.practice.model.dictionary.impl.GenericDictionaryImpl
 import com.rafengimprove.practice.model.dictionary.model.People
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class PeopleDictionaryGeneticImplTest {
+class PeopleDictionaryImplTest {
     @Test
     fun `Happy pass - find elements according to given string`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -26,7 +27,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - find elements according to given predicate`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -44,7 +45,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - find an element which is the only one in the list`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("12345678")
             )
@@ -56,7 +57,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - an element is added to the list`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -80,7 +81,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - an element was deleted from the list`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -104,7 +105,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - add an element and delete that element`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -134,7 +135,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - the list contains an element`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -152,14 +153,14 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Negative pass - find a person in an empty list`() {
-        val people = PeopleDictionaryGeneticImpl(mutableListOf())
+        val people = GenericDictionaryImpl(mutableListOf())
 
         org.junit.jupiter.api.assertThrows<ListIsEmptyException> { people.search("George Clooney") }
     }
 
     @Test
     fun `Negative pass - find a non existing in list fullName number`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),
@@ -177,7 +178,7 @@ class PeopleDictionaryGeneticImplTest {
 
     @Test
     fun `Negative pass - find a deleted person`() {
-        val people = PeopleDictionaryGeneticImpl(
+        val people = GenericDictionaryImpl(
             mutableListOf(
                 People("Andrey Rogov"),
                 People("Robert DeNiro"),

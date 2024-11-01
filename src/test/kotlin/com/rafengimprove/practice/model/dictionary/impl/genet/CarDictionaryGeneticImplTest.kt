@@ -2,6 +2,7 @@ package com.rafengimprove.practice.model.dictionary.impl.genet
 
 import com.rafengimprove.practice.model.dictionary.exceptions.ElementWasNotFoundException
 import com.rafengimprove.practice.model.dictionary.exceptions.ListIsEmptyException
+import com.rafengimprove.practice.model.dictionary.impl.GenericDictionaryImpl
 import com.rafengimprove.practice.model.dictionary.model.Car
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals

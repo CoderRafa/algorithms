@@ -2,14 +2,15 @@ package com.rafengimprove.practice.model.dictionary.impl.genet
 
 import com.rafengimprove.practice.model.dictionary.exceptions.ElementWasNotFoundException
 import com.rafengimprove.practice.model.dictionary.exceptions.ListIsEmptyException
+import com.rafengimprove.practice.model.dictionary.impl.GenericDictionaryImpl
 import com.rafengimprove.practice.model.dictionary.model.Telephone
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TelephoneDictionaryGeneticImplTest {
+class TelephoneDictionaryImplTest {
     @Test
     fun `Happy pass - find elements according to given string`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -26,7 +27,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - find elements according to given predicate`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -44,7 +45,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - find an element which is the only one in the list`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("12345678")
             )
@@ -56,7 +57,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - an element is added to the list`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -80,7 +81,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - an element was deleted from the list`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -104,7 +105,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - add an element and delete that element`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -134,7 +135,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Happy pass - the list contains an element`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -152,14 +153,14 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Negative pass - find a number in an empty list`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(mutableListOf())
+        val phoneNumbers = GenericDictionaryImpl(mutableListOf())
 
         org.junit.jupiter.api.assertThrows<ListIsEmptyException> { phoneNumbers.search("531245888") }
     }
 
     @Test
     fun `Negative pass - find a non existing in list phone number`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
@@ -177,7 +178,7 @@ class TelephoneDictionaryGeneticImplTest {
 
     @Test
     fun `Negative pass - find a deleted number`() {
-        val phoneNumbers = TelephoneDictionaryGeneticImpl(
+        val phoneNumbers = GenericDictionaryImpl(
             mutableListOf(
                 Telephone("131245687"),
                 Telephone("931248687"),
