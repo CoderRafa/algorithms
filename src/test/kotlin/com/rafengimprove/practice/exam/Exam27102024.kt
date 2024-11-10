@@ -3,8 +3,8 @@ package com.rafengimprove.practice.exam
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-enum class CurrencyType {
-    USD, EUR, RUB
+enum class CurrencyType(val rate: Double) {
+    USD(0.9), EUR(1.0), RUB(0.01)
 }
 
 enum class AscendingType {
@@ -14,7 +14,13 @@ enum class AscendingType {
 data class Money(
     val amount: Double,
     val currency: CurrencyType
-)
+) {
+    operator fun plus(other: Money): Money {
+        val value1 = amount * currency.rate
+        val value2 = other.amount * other.currency.rate
+        return Money(value1 + value2, CurrencyType.EUR)
+    }
+}
 
 
 interface MergeSortMoney {
@@ -315,21 +321,31 @@ class Exam27102024 {
             )
         )
     }
-        @Test
-        fun `Negative pass - return empty list when empty list given`() {
-            assertEquals(
-                listOf(),
-                mergeMoney(
-                    AscendingType.DESC,
-                    listOf()
-                )
+
+    @Test
+    fun `Negative pass - return empty list when empty list given`() {
+        assertEquals(
+            listOf(),
+            mergeMoney(
+                AscendingType.DESC,
+                listOf()
             )
-            assertEquals(
-                listOf(),
-                mergeMoney(
-                    AscendingType.ASC,
-                    listOf()
-                )
+        )
+        assertEquals(
+            listOf(),
+            mergeMoney(
+                AscendingType.ASC,
+                listOf()
             )
+        )
     }
+
+    @Test
+    fun `Happy pass - `() {
+        val money1 = Money(25.0, CurrencyType.USD)
+        val money2 = Money(30.0, CurrencyType.EUR)
+       println(money1 + money2)
+    }
+
+
 }
