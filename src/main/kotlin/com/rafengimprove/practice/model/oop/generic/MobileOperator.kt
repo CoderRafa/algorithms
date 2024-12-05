@@ -16,7 +16,7 @@ class CustomSms(
     toNumber: String,
     message: String,
     operator: Operator,
-    extensionTitle: String
+    val extensionTitle: String
 ): Sms(fromNumber, toNumber, message, operator)
 
 enum class Operator {
