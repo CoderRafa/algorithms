@@ -19,8 +19,11 @@ class MaxElement {
         if (list.isEmpty()) return null
         val arrayList = MutableList(256) { 0 }
         for (element in list) {
-            if (element == 0.toByte()) arrayList[128] = 1
-            arrayList[128 + element] = element.toInt()
+            if (element == 0.toByte()) {
+                arrayList[128] = 1
+            } else {
+                arrayList[128 + element] = element.toInt()
+            }
         }
         for (index in arrayList.size - 1 downTo 0) {
             if (arrayList[index] != 0) {
